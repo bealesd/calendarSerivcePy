@@ -26,9 +26,9 @@ class Config(object):
             'type': 'int',
             'regex': r'^(0?[1-9]|1[0-2])$'
             },
-        DAY: {
+        DAY: {#TODO: do an dditional check later to see if date can exist
             'type': 'int',
-            'regex': r'^([0-6]{1})'
+            'regex': r'^(0?[1-9]|[12][0-9]|3[01])'
             },
         HOUR: {
             'type': 'int',

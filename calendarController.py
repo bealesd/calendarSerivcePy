@@ -83,7 +83,7 @@ class CalendarController(object):
                                            validated_args[self.hour],
                                            validated_args[self.minute])
 
-        return Response(json.dumps({'Updated sguid': guid}),
+        return Response(json.dumps({'Updated guid': guid}),
                         mimetype='application/json')
 
     def delete_event(self, guid):
@@ -153,12 +153,12 @@ class CalendarController(object):
         return response
 
     def route_events_with_id(self, guid):
-        if request.method == 'PUT':
+        if request.method == 'GET':
+            response = self.get_event_by_id(guid)
+        elif request.method == 'PUT':
             response = self.update_event(guid)
         elif request.method == 'DELETE':
             response = self.delete_event(guid)
-        elif request.method == 'GET':
-            response = self.get_event_by_id(guid)
         else:
             raise ValueError('Request method: {0}, is not supported for route: {1}.'.format(
                 request.method, request.path))
