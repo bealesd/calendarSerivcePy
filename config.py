@@ -16,7 +16,7 @@ class Config(object):
     PARAMETER_VALIDATION_DICT = {
         TITLE: {
             'type': 'string',
-            'regex': r'^[\w]{1,100}$'
+            'regex': r'^.{1,100}$'
             },
         YEAR: {
             'type': 'int',
@@ -24,7 +24,7 @@ class Config(object):
             },
         MONTH: {
             'type': 'int',
-            'regex': r'^(0?[1-9]|1[0-2])$'
+            'regex': r'^(0?[0-9]|1[0-1])$'
             },
         DAY: {#TODO: do an dditional check later to see if date can exist
             'type': 'int',

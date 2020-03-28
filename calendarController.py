@@ -45,13 +45,13 @@ class CalendarController(object):
 
         validated_args = validationHelperInstance.get_validated_args(**kwargs)
 
-        guid = self.calendarRepo.insertRow(validated_args[self.title],
+        uuid = self.calendarRepo.insertRow(validated_args[self.title],
                                            validated_args[self.year],
                                            validated_args[self.month],
                                            validated_args[self.day],
                                            validated_args[self.hour],
                                            validated_args[self.minute])
-
+        guid = str(uuid)
         return Response(json.dumps({'guid': guid}),
                         mimetype='application/json')
 
