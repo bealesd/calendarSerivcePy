@@ -11,7 +11,6 @@ configInstance = config.Config()
 
 secrets = secrets.Config()
 
-
 class CalendarRepo(object):
     def __name__(self):
         return 'calendarRepo'
@@ -43,8 +42,8 @@ class CalendarRepo(object):
     def createTable(self):
         create_table_sql = '''if not exists (select * from sysobjects where name='{0}' and xtype='U')
                             CREATE TABLE {0} (
-                                            guid UNIQUEIDENTIFIER,
-                                            title VARCHAR,
+                                            guid varchar(255),
+                                            title varchar(255),
                                             year INT,
                                             month INT,
                                             day INT,
@@ -56,7 +55,7 @@ class CalendarRepo(object):
         self.odbc_connection.commit()
 
     def insertRow(self, title, year, month, day, hour, minute):
-        guid = uuid.uuid4()
+        guid = str(uuid.uuid4())
         self.cursor.execute("""INSERT INTO calendar
                                (guid, title, year, month, day, hour, minute)
                                VALUES('{0}', '{1}', {2}, {3}, {4}, {5}, {6})
@@ -108,5 +107,5 @@ class CalendarRepo(object):
     def fetchAll(self):
         rows = []
         for row in self.cursor:
-            rows.append(row)
+            rows.append(list(row))
         return rows
