@@ -7,7 +7,7 @@
             // "program": "${workspaceFolder}//appServer.py",
             // "console": "integratedTerminal",
 
-            "module": "appServer",
+            "module": "application",
             "env": {
                 "FLASK_APP": "application.py",
                 "FLASK_ENV": "development",

@@ -11,7 +11,7 @@ import config
 configInstance = config.Config()
 
 
-class AppServer(object):
+class Application(object):
     def __init__(self):
         self.acl_origin = configInstance.ACL_ORIGIN
         self.calendarRepoInstance = calendarRepo.CalendarRepo()
@@ -52,6 +52,6 @@ class AppServer(object):
 
 
 if __name__ == '__main__':
-    AppServer().run(True)
+    Application().run(True)
 else:
-    AppServer().run(True)
+    Application().run(True)
