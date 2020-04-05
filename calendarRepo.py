@@ -1,7 +1,7 @@
 import secrets
 import pyodbc
 
-import sqlite3
+# import sqlite3
 import uuid
 
 from flask import g
