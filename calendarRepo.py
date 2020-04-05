@@ -1,7 +1,6 @@
 import secrets
 import pyodbc
 
-# import sqlite3
 import uuid
 
 from flask import g
@@ -11,26 +10,27 @@ configInstance = config.Config()
 
 secrets = secrets.Config()
 
+
 class CalendarRepo(object):
     def __name__(self):
         return 'calendarRepo'
 
     def __init__(self):
         self.odbc_connection = pyodbc.connect(
-            driver='{SQL Server}',
+            driver='{ODBC Driver 17 for SQL Server}',
             host='tcp:' + secrets.SERVER,
             database=secrets.DATABASE,
             trusted_connection='no',
             user=secrets.USERNAME,
             password=secrets.PASSWORD)
-        
+
         self.table_name = configInstance.TABLE_NAME
 
         self.cursor = self.odbc_connection.cursor()
 
         if self.checkTableExists() is False:
             self.createTable()
-        
+
         self.database_name = configInstance.DATABASE_NAME
 
     def _init(self):
@@ -96,14 +96,15 @@ class CalendarRepo(object):
         return self.fetchAll()
 
     def checkTableExists(self):
-        self.cursor.execute("select * from sysobjects where name='{0}' and xtype='U'".format(self.table_name))
+        self.cursor.execute(
+            "select * from sysobjects where name='{0}' and xtype='U'".format(self.table_name))
         data = self.fetchAll()
         if len(data) == 0:
             print('There is no table named: {}'.format('calendar'))
             return False
         else:
             return True
-    
+
     def fetchAll(self):
         rows = []
         for row in self.cursor:

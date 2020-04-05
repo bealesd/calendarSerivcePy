@@ -6,24 +6,28 @@ import uuid
 import config
 configInstance = config.Config()
 
+
 class ValidationHelper(object):
     def __init__(self):
         self.paramenter_validation_dict = configInstance.PARAMETER_VALIDATION_DICT
 
     def error_helper(self, error_name, *args):
         if error_name == 'arg_value_error':
-            raise TypeError('Argument name: {0}.Required argument as no value.'.format(args[0]))
+            raise TypeError(
+                'Argument name: {0}.Required argument as no value.'.format(args[0]))
         elif error_name == 'invalid_arg_name':
-            raise KeyError('Argument name: {0}.\nValue: {1}.\nArgument not in config dicitonary.'.format(args[0], args[1]))
+            raise KeyError('Argument name: {0}.\nValue: {1}.\nArgument not in config dicitonary.'.format(
+                args[0], args[1]))
         elif error_name == 'invalid_value':
-            raise KeyError('Argument name: {0}.\nValue: {1}.\nArgument not in config dicitonary.'.format(args[0], args[1]))
-        
+            raise KeyError('Argument name: {0}.\nValue: {1}.\nArgument not in config dicitonary.'.format(
+                args[0], args[1]))
 
     def get_validated_args(self, **kwarg):
         validated_args = {}
         for arg_name, arg_value in kwarg.items():
             if arg_value == None:
-                raise TypeError('Argument name: {0}.Required argument as no value.'.format(arg_name))
+                raise TypeError(
+                    'Argument name: {0}.Required argument as no value.'.format(arg_name))
 
             if arg_name not in self.paramenter_validation_dict:
                 raise KeyError('Argument name: {0}.\nValue: {1}.\nArgument not in config dicitonary.'.format(
@@ -72,4 +76,3 @@ class ValidationHelper(object):
             return value
         except:
             return None
-
